@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accesco Living | Elite Webinar Portal</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --brand: rgb(112, 4, 87);
+            --brand-dark: rgb(75, 2, 58);
+            --brand-glass: rgba(112, 4, 87, 0.1);
+            --sidebar-width: 100px;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- SLEEK SOLID SIDEBAR --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 94vh;
+            position: fixed;
+            left: 20px;
+            top: 3vh;
+            background: var(--brand);
+            border-radius: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 45px 0;
+            z-index: 1000;
+            box-shadow: 12px 0 40px rgba(112, 4, 87, 0.25);
+        }
+
+        .sidebar-logo {
+            width: 45px;
+            margin-bottom: 60px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .nav-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .nav-link-custom {
+            width: 60px;
+            height: 60px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.45);
+            transition: all 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+            cursor: pointer;
+            z-index: 2;
+            text-decoration: none;
+        }
+
+        .nav-link-custom i { font-size: 1.6rem; }
+        .nav-link-custom.active { color: white; background: rgba(255,255,255,0.15); }
+
+        /* --- CONTENT WRAPPER --- */
+        .main-wrapper {
+            margin-left: calc(var(--sidebar-width) + 60px);
+            padding: 50px 30px;
+        }
+
+        .content-area { max-width: 1200px; margin: 0 auto; }
+
+        .section-view { display: none; }
+        .section-view.active { display: block; }
+
+        /* --- HERO & CARDS --- */
+        .hero-card {
+            background: var(--brand);
+            background-image: radial-gradient(circle at top right, rgba(255,255,255,0.1), transparent);
+            border-radius: 40px;
+            padding: 80px 60px;
+            color: white;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .webinar-card {
+            border: 1px solid #f0f0f0;
+            border-radius: 30px;
+            padding: 35px;
+            transition: 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+            height: 100%;
+            background: white;
+            position: relative;
+        }
+
+        .webinar-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(112, 4, 87, 0.1);
+            border-color: var(--brand);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: var(--brand-glass);
+            color: var(--brand);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        .btn-join {
+            background: var(--brand);
+            color: white;
+            border-radius: 14px;
+            padding: 12px 25px;
+            font-weight: 700;
+            border: none;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn-join:hover { background: var(--brand-dark); color: white; }
+
+        .investor-pill {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        .avatar-circle {
+            width: 70px;
+            height: 70px;
+            background: var(--brand);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <img src="assets/accesco_white.png" alt="AL" class="sidebar-logo">
+        
+        <div class="nav-container">
+            <a class="nav-link-custom active" onclick="switchTab(this, 'event')" title="Event Info">
+                <i class="bi bi-calendar-check"></i>
+            </a>
+            <a class="nav-link-custom" onclick="switchTab(this, 'webinar')" title="Webinar Activities">
+                <i class="bi bi-broadcast"></i>
+            </a>
+            <a class="nav-link-custom" onclick="switchTab(this, 'investors')" title="Investors">
+                <i class="bi bi-person-badge"></i>
+            </a>
+            <a class="nav-link-custom" onclick="switchTab(this, 'register')" title="Register">
+                <i class="bi bi-plus-circle"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="main-wrapper">
+        <div class="content-area">
+
+            <section id="event" class="section-view active">
+                <div class="hero-card">
+                    <div class="d-flex gap-2 mb-4">
+                        <span class="badge bg-white text-dark px-3 py-2 rounded-pill fw-bold">JAN 26, 2026</span>
+                        <span class="badge bg-white text-dark px-3 py-2 rounded-pill fw-bold">10 AM - 6 PM</span>
+                    </div>
+                    <h1 class="display-3 fw-800 mb-3">Accesco Living <br>Startup Webinar</h1>
+                    <p class="lead opacity-75 w-75">India's premier startup pitch event. 30 teams. ₹16,000 prize. One stage for the future of Intelligent Commerce.</p>
+                </div>
+
+                <div class="row g-4 mb-5 text-center">
+                    <div class="col-md-3">
+                        <h6 class="text-muted fw-bold">PRIZE POOL</h6>
+                        <h2 class="fw-800" style="color: var(--brand)">₹16,000</h2>
+                    </div>
+                    <div class="col-md-3">
+                        <h6 class="text-muted fw-bold">REG. FEE</h6>
+                        <h2 class="fw-800" style="color: var(--brand)">₹999</h2>
+                    </div>
+                    <div class="col-md-3">
+                        <h6 class="text-muted fw-bold">TEAMS</h6>
+                        <h2 class="fw-800" style="color: var(--brand)">30 Max</h2>
+                    </div>
+                    <div class="col-md-3">
+                        <h6 class="text-muted fw-bold">TEAM SIZE</h6>
+                        <h2 class="fw-800" style="color: var(--brand)">4-5 People</h2>
+                    </div>
+                </div>
+                <h1>About</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure quaerat eveniet vero aut voluptates repellat pariatur quae autem laudantium aliquid ullam inventore corporis, asperiores obcaecati unde dolore, a, provident earum!
+                Quae enim voluptatem culpa unde maxime ab voluptates in, ea quos rerum quia obcaecati reiciendis provident doloribus quidem eveniet ratione, aut consectetur quibusdam! Illum vero enim eius fuga explicabo sit.
+                Est nostrum neque placeat, modi unde perspiciatis pariatur tenetur qui saepe, cumque reiciendis architecto, eligendi eius vitae? Quam molestias, laudantium excepturi explicabo saepe, iure nihil fuga, optio illo velit eum.
+                Iusto quod ut eaque ducimus nihil, sequi, ad mollitia labore temporibus facere aspernatur enim blanditiis nemo laborum inventore assumenda voluptate sit perferendis necessitatibus excepturi, quae provident quibusdam! Quas, doloribus quasi.
+                Sapiente maiores veniam obcaecati non exercitationem consectetur, repudiandae eveniet vitae eum! Eius ex dignissimos cupiditate harum blanditiis. Culpa, corrupti. Illum repellat laudantium suscipit, non ab nesciunt iure at fuga unde?
+                Veniam dolore, ex repudiandae minima tempore quis non ipsa est repellat libero hic doloribus nam? Quibusdam ratione praesentium iusto. Ea beatae sequi aut vitae aperiam unde. Quasi, voluptates. Vel, explicabo.
+                Eveniet debitis neque quidem laborum soluta maiores dignissimos facere quia veniam aliquam! Qui animi velit dicta explicabo, minus repellat, cupiditate, nisi placeat culpa non optio ipsa autem. Tempore, aspernatur atque!
+                Hic ab cupiditate mollitia harum officia iusto nam voluptatibus odit, consequuntur unde, sed laborum tempore optio magnam dolorum voluptas provident illo maiores. Quos est, iste dolorum tempora vel quidem similique.
+                Illo fuga est quam laborum facilis optio libero praesentium, veritatis illum. Veniam vero voluptates, neque culpa at molestiae dolore tenetur, recusandae illum officiis nisi doloribus distinctio ad commodi sit repudiandae!
+                Rem quasi iste repellendus possimus corrupti blanditiis, fugiat recusandae at odio voluptates. Neque quam modi sequi accusantium quos necessitatibus voluptatem pariatur, culpa sit soluta tempora enim repellendus porro consectetur? Voluptatibus.</p>
+                <br>
+                <H1>Requirements</H1>
+                <ul>
+                    <li>Must be registered as a startup or early-stage company.</li>
+                    <li>Teams should consist of 4-5 members.</li>
+                    <li>Each team must pay a registration fee of ₹999.</li>
+                    <li>Participants should be prepared to present their business idea in a concise manner.</li>
+                    <li>All presentations must be original and not previously published.</li>
+                    <br>
+                <h1>Shedule</h1>
+                <ul>
+                    <li>10:00 AM - 10:30 AM: Opening Remarks and Introduction</li>
+                    <li>10:30 AM - 12:30 PM: Team Pitches (First Round)</li>
+                    <li>12:30 PM - 1:30 PM: Lunch Break</li>
+                    <li>1:30 PM - 3:30 PM: Team Pitches (Second Round)</li>
+                    <li>3:30 PM - 4:00 PM: Coffee Break and Networking</li>
+                    <li>4:00 PM - 5:00 PM: Finalist Announcements and Q&A Session</li>
+                    <li>5:00 PM - 6:00 PM: Award Ceremony and Closing Remarks</li>
+            </section>
+
+            <section id="webinar" class="section-view">
+                <div class="mb-5">
+                    <h1 class="fw-800">Webinar <span style="color: var(--brand)">Sessions</span></h1>
+                    <p class="text-muted">Explore the live tracks for the Jan 26th event.</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="webinar-card">
+                            <div class="icon-box"><i class="bi bi-lightbulb"></i></div>
+                            <h4 class="fw-bold mb-2">Idea Pitch</h4>
+                            <p class="text-muted small mb-4">30 teams present their disruptive startup ideas to the panel.</p>
+                            <a href="https://meet.google.com/scr-wssv-zrc" target="_blank" class="btn btn-join">Join Session</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="webinar-card">
+                            <div class="icon-box"><i class="bi bi-chat-dots"></i></div>
+                            <h4 class="fw-bold mb-2">General Discussion</h4>
+                            <p class="text-muted small mb-4">Open networking and Q&A about the Accesco ecosystem.</p>
+                            <a href="https://meet.google.com/scr-wssv-zrc" target="_blank" class="btn btn-join">Join Session</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="webinar-card">
+                            <div class="icon-box"><i class="bi bi-currency-exchange"></i></div>
+                            <h4 class="fw-bold mb-2">Investment Talks</h4>
+                            <p class="text-muted small mb-4">Deep dive into funding, scalability, and Series B insights.</p>
+                            <a href="https://meet.google.com/scr-wssv-zrc" target="_blank" class="btn btn-join">Join Session</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="investors" class="section-view">
+                <h1 class="fw-800 mb-5 text-center">Investor <span style="color: var(--brand)">Circle</span></h1>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-3">
+                        <div class="investor-pill">                            
+                            <img src="assets/sujal.avif" alt="" class="col-md-7">
+                            <h5 class="fw-bold mb-0">Sujal Chhetri</h5>
+                            <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, sunt omnis? Non qui suscipit, delectus officiis quisquam velit tempora, quo amet explicabo repudiandae saepe, incidunt aut. Magnam atque ipsum quisquam.</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="investor-pill">
+                            <img src="assets/argo.jpg" alt="" class="col-md-7">
+                            <h5 class="fw-bold mb-0">Argo</h5>
+                            <h6>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur ipsa magni asperiores doloremque possimus temporibus cum repellat sed repellendus! Dolore voluptates earum nisi voluptas consectetur totam minima aut porro saepe.</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="investor-pill">
+                            <img src="assets/adrija.avif" alt="" class="col-md-7">
+                            <h5 class="fw-bold mb-0">Adrija</h5>
+                            <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur tempora minus aut eum quasi, a perspiciatis eos earum, dicta obcaecati provident, modi dolore. Fuga necessitatibus quia voluptate harum natus quo!</h6>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="register" class="section-view">
+                <div class="row justify-content-center">
+                    <div class="col-md-5 text-center">
+                        <div class="webinar-card">
+                            <h2 class="fw-800 mb-4">Register Now</h2>
+                            <p class="text-muted mb-4">Secure your team's slot for the pitch event. Registration fee of ₹999 applies.</p>
+                            <button class="btn btn-join py-3">Register for ₹999</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script>
+        function switchTab(el, tabId) {
+            // UI Toggle
+            document.querySelectorAll('.nav-link-custom').forEach(l => l.classList.remove('active'));
+            if(el) el.classList.add('active');
+
+            // Content Transition
+            const current = document.querySelector('.section-view.active');
+            gsap.to(current, {
+                opacity: 0, 
+                y: 15, 
+                duration: 0.3, 
+                onComplete: () => {
+                    current.classList.remove('active');
+                    const next = document.getElementById(tabId);
+                    next.classList.add('active');
+                    gsap.fromTo(next, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4 });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
