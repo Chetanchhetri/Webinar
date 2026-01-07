@@ -9,8 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-    <style>
+     <style>
         :root {
             --brand: rgb(112, 4, 87);
             --brand-dark: rgb(75, 2, 58);
@@ -23,7 +22,9 @@
             color: #1a1a1a;
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* --- SIDEBAR --- */
@@ -54,7 +55,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
         }
 
         .nav-link-custom {
@@ -77,8 +78,9 @@
         /* --- CONTENT WRAPPER --- */
         .main-wrapper {
             margin-left: calc(var(--sidebar-width) + 60px);
-            padding: 50px 30px;
+            padding: 50px 30px 0 30px;
             transition: all 0.4s ease;
+            flex: 1 0 auto;
         }
 
         .content-area { max-width: 1200px; margin: 0 auto; }
@@ -178,12 +180,12 @@
         }
         
         .investor-pill img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
             border-radius: 50%;
             margin-bottom: 20px;
-            border: 3px solid var(--brand);
+            border: 4px solid var(--brand);
         }
 
         .btn-join {
@@ -197,53 +199,66 @@
             transition: 0.3s;
         }
 
-        /* --- MOBILE ADJUSTMENTS --- */
+        /* --- FOOTER --- */
+        footer {
+            margin-left: calc(var(--sidebar-width) + 60px);
+            padding: 60px 30px;
+            background: #fdfafd;
+            border-top: 1px solid #eee;
+            margin-top: 80px;
+            flex-shrink: 0;
+        }
+        
+        .footer-logo {
+            width: 120px;
+            margin-bottom: 20px;
+            filter: grayscale(1) brightness(0.2);
+            opacity: .8;
+        }
+
+        .footer-link {
+            text-decoration: none;
+            color: #666;
+            transition: 0.3s;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .footer-link:hover { color: var(--brand); }
+
+        .social-circle {
+            width: 40px;
+            height: 40px;
+            background: #eee;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand);
+            margin-right: 10px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .social-circle:hover {
+            background: var(--brand);
+            color: white;
+        }
+
         @media (max-width: 991px) {
             .sidebar {
-                width: 100%;
-                height: 75px;
-                top: auto;
-                bottom: 0;
-                left: 0;
-                border-radius: 30px 30px 0 0;
-                flex-direction: row;
-                justify-content: space-around;
-                padding: 0 10px;
-                box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+                width: 100%; height: 75px; top: auto; bottom: 0; left: 0;
+                border-radius: 30px 30px 0 0; flex-direction: row;
+                justify-content: space-around; padding: 0 10px;
             }
-
             .sidebar-logo { display: none; }
-
-            .nav-container {
-                flex-direction: row;
-                width: 100%;
-                justify-content: space-evenly;
-                gap: 0;
-            }
-
-            .nav-link-custom {
-                width: 50px;
-                height: 50px;
-                border-radius: 15px;
-            }
-
-            .main-wrapper {
-                margin-left: 0;
-                padding: 30px 15px 100px 15px;
-            }
-
-            .hero-card {
-                padding: 40px 25px;
-                border-radius: 30px;
-            }
-
-            .hero-card h1 { font-size: 2rem; }
-            .hero-card .lead { width: 100% !important; font-size: 1rem; }
-            
-            .schedule-item { flex-direction: column; gap: 5px; }
-            .time-tag { min-width: auto; }
+            .nav-container { flex-direction: row; width: 100%; justify-content: space-evenly; gap: 0; }
+            .main-wrapper, footer { margin-left: 0; padding: 30px 15px 100px 15px; }
+            footer { padding-bottom: 120px; margin-top: 40px; }
+            .hero-card { padding: 40px 25px; border-radius: 30px; }
         }
     </style>
+    
 </head>
 <body>
 
@@ -262,6 +277,9 @@
             </a>
             <a class="nav-link-custom" onclick="switchTab(this, 'register')" title="Register">
                 <i class="bi bi-plus-circle"></i>
+            </a>
+            <a class="nav-link-custom" onclick="switchTab(this, 'contact')" title="Contact Us">
+                <i class="bi bi-envelope-at"></i>
             </a>
         </div>
     </div>
@@ -314,7 +332,7 @@
                         </ul>
 
                         <h2 class="section-header">Event Schedule</h2>
-                        <div class="webinar-card p-0 overflow-hidden mb-5">
+                        <div class="webinar-card p-0 overflow-hidden mb-3" style="height:33%;">
                             <div class="schedule-item">
                                 <span class="time-tag">10:00 - 10:30 AM</span>
                                 <span>Opening Remarks and Introduction</span>
@@ -338,6 +356,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2 class="section-header">Registration & Pricing</h2>
+                        <div class="webinar-card p-0 overflow-hidden mb-5" style="height:auto;">
+                            <div class="schedule-item bg-light">
+                                <span class="time-tag">Tier Type</span>
+                                <span class="fw-bold">Investment / Fee</span>
+                            </div>
+                            <div class="schedule-item">
+                                <span class="time-tag">Student Pass</span>
+                                <span>₹99 / Person</span>
+                            </div>
+                            <div class="schedule-item">
+                                <span class="time-tag">General Pass</span>
+                                <span>₹199 / Person</span>
+                            </div>
+                            <div class="schedule-item">
+                                <span class="time-tag">Startup Pitch Entry</span>
+                                <span>₹1199 / Team</span>
+                            </div>
+                        
+                        </div>
             </section>
 
             <section id="webinar" class="section-view">
@@ -352,7 +392,7 @@
                             <div class="icon-box mx-auto"><i class="bi bi-lightbulb"></i></div>
                             <h4 class="fw-bold mb-2">Idea Pitch</h4>
                             <p class="text-muted small mb-4">30 teams present their disruptive startup ideas to the panel.</p>
-                            <a href="#" class="btn btn-join">Join Session</a>
+                            <a href="https://meet.google.com/gnp-ugeh-uxe" class="btn btn-join">Join Session</a>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -360,7 +400,7 @@
                             <div class="icon-box mx-auto"><i class="bi bi-chat-dots"></i></div>
                             <h4 class="fw-bold mb-2">General Discussion</h4>
                             <p class="text-muted small mb-4">Open networking and Q&A about the Accesco ecosystem.</p>
-                            <a href="#" class="btn btn-join">Join Session</a>
+                            <a href="https://meet.google.com/foy-tzsi-pax" class="btn btn-join">Join Session</a>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -368,38 +408,63 @@
                             <div class="icon-box mx-auto"><i class="bi bi-currency-exchange"></i></div>
                             <h4 class="fw-bold mb-2">Investment Talks</h4>
                             <p class="text-muted small mb-4">Deep dive into funding, scalability, and Series B insights.</p>
-                            <a href="#" class="btn btn-join">Join Session</a>
+                            <a href="https://meet.google.com/zkp-xoxe-uii" class="btn btn-join">Join Session</a>
                         </div>
                     </div>
                 </div>
+                <div>
+                    <br>
+                    <h2 class="section-header">Rules & Regulations</h2>
+                    <ul class="styled-list">
+                        <li><i class="bi bi-shield-check-fill"></i> <strong>Punctuality:</strong> All teams must join the virtual room 10 minutes before their scheduled slot.</li>
+                        <li><i class="bi bi-shield-check-fill"></i> <strong>Presentation Limit:</strong> Pitches are strictly limited to 5 minutes followed by 2 minutes of Q&A.</li>
+                        <li><i class="bi bi-shield-check-fill"></i> <strong>Media Guidelines:</strong> Ensure all slide decks are uploaded in PDF format 24 hours prior to the event.</li>
+                        <li><i class="bi bi-shield-check-fill"></i> <strong>Code of Conduct:</strong> Professional decorum must be maintained; disruptive behavior will lead to immediate disqualification.</li>
+                        <li><i class="bi bi-shield-check-fill"></i> <strong>Technical Ready:</strong> Participants are responsible for their own stable internet connection and audio/video hardware.</li>
+                    </ul>
+                </div>
             </section>
-
             <section id="investors" class="section-view">
-                <h1 class="fw-800 mb-5 text-center">Investor <span style="color: var(--brand)">Circle</span></h1>
-                <div class="row g-4 justify-content-center">
+                <div class="text-center mb-5">
+                    <h1 class="fw-800">Investor <span style="color: var(--brand)">Circle</span></h1>
+                    <p class="text-muted">Meet the visionary leaders backing the next generation of commerce.</p>
+                </div>
+                
+                <div class="row g-4 mb-5">
                     <div class="col-md-4">
                         <div class="investor-pill">                            
-                            <img src="assets/sujal.avif" alt="Sujal">
-                            <h5 class="fw-bold mb-2">Sujal Chhetri</h5>
-                            <p class="text-muted small">Venture Partner specializing in FinTech and consumer commerce with over 10 years of experience.</p>
+                            <img src="https://i.pravatar.cc/150?u=1" alt="Investor">
+                            <h5 class="fw-bold mb-1">Marcus Thorne</h5>
+                            <p class="text-brand small fw-bold mb-2">Venture Partner, Peak Capital</p>
+                            <p class="text-muted small">Specializing in FinTech and consumer commerce with over 15 years of institutional investment experience.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="investor-pill">
-                            <img src="assets/argo.jpg" alt="Argo">
-                            <h5 class="fw-bold mb-2">Argo</h5>
-                            <p class="text-muted small">Lead strategist at global venture funds focusing on seed-stage disruptive technologies.</p>
+                            <img src="https://i.pravatar.cc/150?u=2" alt="Investor">
+                            <h5 class="fw-bold mb-1">Elena Rodriguez</h5>
+                            <p class="text-brand small fw-bold mb-2">MD, Global Tech Fund</p>
+                            <p class="text-muted small">Lead strategist focusing on seed-stage disruptive technologies and AI-driven market solutions.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="investor-pill">
-                            <img src="assets/adrija.avif" alt="Adrija">
-                            <h5 class="fw-bold mb-2">Adrija</h5>
-                            <p class="text-muted small">Angel investor and mentor for female-led startups in the South Asian ecosystem.</p>
+                            <img src="https://d.hngn.com/en/full/292194/kelly-ortberg.jpg" alt="Investor">
+                            <h5 class="fw-bold mb-1">Sarah Jenkins</h5>
+                            <p class="text-brand small fw-bold mb-2">Angel Investor</p>
+                            <p class="text-muted small">Expert mentor for female-led startups and sustainable commerce initiatives across the South Asian ecosystem.</p>
                         </div>
                     </div>
                 </div>
+
+                <div class="webinar-card border-0 bg-light p-5">
+                    <h3 class="fw-bold mb-4">Investment Philosophy</h3>
+                    <p class="text-muted" style="line-height: 1.8;">
+                        Our investor circle represents a diverse group of industry veterans committed to long-term value creation. Beyond capital, they provide the strategic mentorship and global network necessary for startups to scale from local pilots to international markets. They focus on founders who demonstrate resilience, technical excellence, and a clear vision for the future of Intelligent Commerce.
+                    </p>
+                </div>
             </section>
+            
 
             <section id="register" class="section-view">
                 <div class="row justify-content-center">
@@ -414,14 +479,95 @@
                 </div>
             </section>
 
+            <section id="contact" class="section-view">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <h1 class="fw-800 mb-4">Get in <span style="color: var(--brand)">Touch</span></h1>
+                        <p class="text-muted mb-5">Accesco Living is revolutionizing modern housing through community-centric co-living spaces and intelligent property management. Reach out to explore our ecosystem.</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="webinar-card">
+                                    <div class="icon-box"><i class="bi bi-geo-alt"></i></div>
+                                    <h5 class="fw-bold">Accesco Living HQ</h5>
+                                    <p class="text-muted small">Suite 402, Eco-Tech Hub<br>Whitefield, Bengaluru, India 560066</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="webinar-card">
+                                    <div class="icon-box"><i class="bi bi-telephone"></i></div>
+                                    <h5 class="fw-bold">Inquiries & Support</h5>
+                                    <p class="text-muted small">hello@accescoliving.com<br>+91 91234 56789</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </div>
+
+    <footer>
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <img src="assets/accesco_white.png" alt="Accesco Living" class="footer-logo">
+                    <p class="text-muted small pe-lg-5">Empowering the next generation of commerce through intelligent innovation and global connectivity.</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-circle"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="fw-bold mb-4">Navigation</h6>
+                    <a href="javascript:void(0)" onclick="switchTab(null, 'event')" class="footer-link">Home</a>
+                    <a href="javascript:void(0)" onclick="switchTab(null, 'webinar')" class="footer-link">Sessions</a>
+                    <a href="javascript:void(0)" onclick="switchTab(null, 'investors')" class="footer-link">Investors</a>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="fw-bold mb-4">Legal</h6>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Refund Policy</a>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="fw-bold mb-4">Newsletter</h6>
+                    <p class="text-muted small">Stay updated with our latest events and insights.</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control border-0 bg-white" placeholder="Email address" style="border-radius: 12px 0 0 12px; padding: 12px;">
+                        <button class="btn btn-join w-auto px-4" type="button" style="border-radius: 0 12px 12px 0;">Join</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-5 opacity-25">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-muted small mb-0">© 2026 Accesco Living. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted small mb-0">Designed for Future Founders.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
         function switchTab(el, tabId) {
             // UI Toggle
             document.querySelectorAll('.nav-link-custom').forEach(l => l.classList.remove('active'));
-            if(el) el.classList.add('active');
+            
+            // If the call comes from sidebar, el will exist. If from footer links, we find the sidebar link.
+            if(el) {
+                el.classList.add('active');
+            } else {
+                // Find matching link in sidebar to keep UI synced
+                const sidebarLinks = document.querySelectorAll('.nav-link-custom');
+                sidebarLinks.forEach(link => {
+                    if(link.getAttribute('onclick').includes(tabId)) link.classList.add('active');
+                });
+            }
 
             // Content Transition
             const current = document.querySelector('.section-view.active');
